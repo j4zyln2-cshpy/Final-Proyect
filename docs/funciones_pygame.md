@@ -119,6 +119,24 @@ Para mostrar el dinero acumulado, puntos, vida, oleadas, o lo necesario, porfin 
 * *txt_surface = font.render(f"Oro:{gold}", True, (255,255,255))*: Genera una superficie con el texto dibujado
 * *window.blit(txt_surface,(x,y))*: Pega ese texto en la pantalla
 
+7) Control de Sonido y Música:
+* *pygame.mixer.init()*: esto inicia el sistema de audio de pygame
+* *pygame.mixer.sound.set:volumen(n)*: Reproduce la música, peroooo, ajsta el volumen a n, por ejemplo, supongamoos que fuese 0.5, ajusta el volumen a 50% 
+* *pygame.mixer.sound.load("musiquitagud.wav/mp3)*: carga un sonido en especifico
+* *pygame.mixer.music.play(-1)*: Reproduce la música de fondo en un loop infinito DKLFKKFJFKJFKFJKFKFJFKJFKFJKFJKFJKFJFKJFKJFKFJKFJKFJFKJFK
+
+8) Transformación de Gráficos:
+* *pygame.transform.flip(superficie, flip_x, flip_y)*: Invierte la imagen de forma horizontal o vertical
+* *pygame.transform.rotate(surface,angle)*: Rota la imagen a los grados que pusiste ahí
+
+9) Entrada, eventos:
+
+* *pygame.key.get_pressed()*: Devuelve una lista con el estado de TODAS las teclas
+* *pygame.KEYDOWN*:  es un tipo de evento que se activa exactamente en el momento en que el usuario presiona una tecla hacia abajo en el teclado.
+* *pygame.mouse.get_visible()*: Oculta el puntero para dibujar una mira o un cursor en pixel-art xd
+
+-- posteriormente añadiré para hacer colisiones, más funciones de añadir eventos, etc :D
+
 # ¿Cómo instalarlo?
 
 Ejecuta los siguientes comandos en orden: Ctrl + J -> Terminal -> pip install pygame 
@@ -155,6 +173,6 @@ La verdad, un poco rara, no diré traumatica, ni nada de ese estilo, a y por cie
 
 ![alt text](animations.gif)
 
--- VAYANSE A LA MIERDA: J4ZYLN2 XD
+-- oa: J4ZYLN2 
 
 me acabo de dar cuenta que no subí nada, pero llevo desde el 2-3 de agosto con el repositorio vacío, hoy 5 o mañana 6 de agosto subo aunque sea algo nwbn, pq ese repositorio hace ya 2 días que lo debería de tener actualizado, no me jodas njkdjkdjdkjdkjdkjdkjdkjdkjdkjdkdjkdkdj (odio mi vida)
