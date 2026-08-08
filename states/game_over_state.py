@@ -1,7 +1,8 @@
 import pygame
 import os
+from states.base_state import BaseState
 
-class GameOverState:
+class GameOverState(BaseState):
     def __init__(self, game):
         super().__init__(game) #"encripto" la variable game 
         self.font_title =  pygame.font.SysFont("Arial", 44, bold=True)
@@ -31,7 +32,7 @@ class GameOverState:
 
     def draw(self, surface):
                
-               surface.blit((30, 10, 10))
+               surface.fill((30, 10, 10))
        
                title_surf = self.font_title.render("PERDISTE XD", True, (230, 50, 50))
                title_rect = title_surf.get_rect(center=(surface.get_width() // 2, 200))

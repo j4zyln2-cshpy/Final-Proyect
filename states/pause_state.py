@@ -1,9 +1,10 @@
 import pygame
 import os
+from states.base_state import BaseState
 
 
-class PauseState:
-    def __init__(self,game):
+class PauseState(BaseState):
+    def __init__(self, game):
         super().__init__(game)
         self.font_title = pygame.font.SysFont("Arial", 40, bold=True)
         self.font_options = pygame.font.SysFont("Arial", 28)
