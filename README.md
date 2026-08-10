@@ -97,6 +97,8 @@ nodiretitulo /
 
 - README.md *archivo de lectura principal*
 
+- ACTUALIZACIONES.md *archivo principal de documentación y actualizaciones*
+
 # Entidades / Clases Principales:
 
 -- Entidades Principales:
@@ -157,11 +159,11 @@ nodiretitulo /
 -- Test 6: Realizado (09/08/2026)
 *Descripción:* Prueba de Interacciones entre Enemigos, Torre y Defensores
 
--- Test 7: Pendiente ()
-*Descripción:* Integración completa de Sprites de Mapa 2D / 1D
+-- Test 7: Realizado (10/08/2026)
+*Descripción:* Integración completa de Sprites , Colisiones sencilla de 1D
 
 -- Test 8: Pendiente ()
-*Descripción:* Implementación de Moneditas de Oro, Interfaz, Unidades
+*Descripción:* Implementación de Moneditas de Oro, Interfaz, Unidades, Colisiones de forma completa
 
 -- Test 9: Pendiente ()
 *Descripción:* Gestionar Oleadas y Game Over definnitivo (aunque en main.py ya está)
@@ -177,7 +179,7 @@ nodiretitulo /
 
 # Mejoras Futuras:
 
--- Agregar verdaderos sprites y música producida por mí, no hechos en paint u obtenidos de khinsider
+-- Agregar verdaderos sprites y música producida por mí, no hechos en paint u obtenidos de khinsider, como fue la idea del juego, usaré asesprite xd
 -- Agregar animaciones de múltiples frames (spritesheets) para animaciones de caminar, atacar, apariciones, etc
 -- Incluir hechizos de area con temporizadores (cooldown)
 
@@ -193,8 +195,12 @@ nodiretitulo /
 git add bugs.py
 git commit -m "more bugs lol"
 
-![alt text](image.png) XDDDDDDDDD
+XDDDDDDDDDDD
 
 # Constancia de Actualizaciones:
 
 -- luego de la culminación del proyecto xd, esto no es para llevar los cambios actuales, para eso tendrás subido otro archivo markdown apenas se culmine este proyecto, más bien, es para llevar constancia de actualizaciones futuras posterior a su entrega (ya que es un trabajo, no un proyecto real)
+
+# PD:
+
+-- se que dije que iba a añadirle comentarios a todo, pero aparte de que se ve feo, es confuso para el que no sepa como ejecutarlo, por eso la documentación, que está incompleta
