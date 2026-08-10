@@ -1,5 +1,7 @@
 # Proyecto final Coderhub: Presentado por José Petit / J4zyln2-chspy
 
+-- actualizar al final? NO, documentaré lo que puedo documentar hasta ahora :3
+
 * Title: Last Standing Defense / Kingdom Defense 1D*
 
 * Usuario Objetivo: Al inicio será para jugadores casuales, o gente que le guste esta clase de juegos, con el paso de las actualizaciones intentaré implementar nuevas estrategias para atraer jugadores diarios, con sistemas de niveles mejorados, nuevas mejoras, etc
@@ -72,52 +74,52 @@ nodiretitulo /
          -- sounds/ # *carpeta de sonidos a utilizar*
          -- images/ # *carpeta de imagenes a utilizar*
 
-- database /
+- database / # *carpeta principal de manejo de base de datos*
 
 - src /
-      -- core /
-      -- entities/
-      -- scenes/
+      -- core / # *carpeta para manejar sonidos y sprites*
+      -- entities/ # *carpeta de entidades*
+      -- scenes/ # *escenas de juego y mapa*
 
 - tests /
-        captures/
-        pygame/
+        captures/ # *capturas de lo llevado a lo actual en el juego*
+        pygame/ # *capturas, código, animaciones de un mini juego*
 
-- docs /
+- docs / *documentación base de lo que llevo hasta hoy*
 
-- states /
+- states / *estados base del juego*
 
-- main.py
+- main.py *archivo principal de juego*
 
-- requirements.txt
+- requirements.txt *requerimientos necesarios*
 
-- .gitignore
+- .gitignore *archivo que le indica a git lo que ignorará*
 
-- README.md
+- README.md *archivo de lectura principal*
 
 # Entidades / Clases Principales:
 
 -- Entidades Principales:
 
 1) Defensor:
-   1.1) Hechicero
-   1.2) Espadachin
-   1.3) Arquero/Soldado
-   1.4) Caballero
+   1.1 Hechicero
+   1.2 Espadachin
+   1.3 Arquero/Soldado
+   1.4 Caballero
 2) Torre:
-   2.1) Torre Rey
-   2.2) Torre Mágica
-   2.3) Torre Base
+   2.1 Torre Rey
+   2.2 Torre Mágica
+   2.3 Torre Base
 3) Enemigo:
-   3.1) Duende
-   3.2) Ogros
-   3.3) Verdugo
-   3.4) Jefe/Monstruo (Ogro principalmente)
+   3.1 Duende
+   3.2 Ogros
+   3.3 Verdugo
+   3.4 Jefe/Monstruo (Ogro principalmente)
 4) Proyectiles y Armas:
-   4.1) Flecha
-   4.2) Bombas
-   4.3) Foso
-   4.4) Mundíbulo
+   4.1 Flecha
+   4.2 Bombas
+   4.3 Foso
+   4.4 Mundíbulo
 5) Monedas de Oro
 
 -- Estados:
