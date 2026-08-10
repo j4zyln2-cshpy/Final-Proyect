@@ -40,17 +40,58 @@ PROMPT 4: Sé que para toda importación de pygame tengo que implementar pygame.
 
 *pd: no, no es un error desconocido, verdaderamente tenía dudas de este error, fue de lo que no ví a documentarme xddddd (pd: eso aparece casi que entrando a pygame, me dió flojera ver XD) esto me saltó a la hora de hacer el primer test en main.py, que se llamaba realmente pygame.py. Osea sí, soy un tonto, pero con clase (╬▔皿▔)╯*
 
-Prompts desde: 01/08/2026 - 05/08/2026 
+
+-- Función: Lógica de colisiones sencilla
+
+PROMPT 5: "Actúa como un arquitecto de videojuegos indie. Explícame de una forma un poco más conceptual, más basado en como funciona ua colisión, o en teoría, acerca de como funciona o funcionaría la detección de colisiones en un juego unidimensional entre un enemigo en movimiento y el jugador en velocidad 0, un cuerpo estático. ¿Qué variables lógicas se necesitan para que no se sobrepongan en un frame en específico del ciclo de juego y así no se vea tan sobresaturado de enemigos o entidades dentro del mapa?. Supongamos que existe Mario 1D, Goomba y Mario pueden participar en el mismo punto en el eje Y, pero, omo es el juego, al confirmarse que si hay más enemigos, ¿Cómo funcionaría para que no se vea sobresaturado un juego que tiene más de, por lo menos, 20 enemigos? Podrías incluso mostrarlo en código, pseudocódigo, o una estrategia útil que pueda entender hasta un niño"
+
+Prompts desde: 01/08/2026 - 08/08/2026 
 
 # Prompts que yo recomendaría (Tomando de inspiración a D.M):
 
-IDEA 1:
+* *EXTRA: La idea 1 es el prompt base, el 2 y el 3 es para documentación y depuración*
 
-IDEA 2:
+*IDEA 1*: 
 
-IDEA 3:
+-- Actúa como desarrollador de videojuegos, profesor, o desarollador de software para un principiante. Quiero definir un proyecto (individual o en grupo, depende de como trabajes). Para una ruta sencilla, tengo un dominio relativamente corto pero útil en (implementas lo que manejas xd). Lo propuesto para un avance actual es (tu ideita), pero, antes de proponer una solución, puedes hacer una estrategia de evaluación y documentación claves para mantenerme al margen del conocimiento necesario. Podríamos definir las siguientes variables obligatorias para el proyecto:
+
+(tus variables)
+
+Con todo lo mencionado, el punto aquí no es escribir código, ya que, la idea central de un programador/ingeniero/estudiante es resolver problemas específico, sean básicos, intermedio o avanzado. Imaginate un contexto (puedes tomar una referencia necesaria para el proyecto, como guía), entregandome una ficha para documentación y de proyecto, definiciones de activos como el/los MVP y el flujo lógico, y uun formato MSCW (Must, Should, Could, Wont)
+
+*IDEA 2*: 
+
+-- Suponte que estás documentado totalmente en [tecnología], Investiguemos un problema relacionado con[tema/temasproyecto] en específico, ayudame a entender como surge este problema, cual es el punto de este problema y una solución. 
+
+Context: [contexto]
+
+Entre algunas referencias a tomar, distingamos puntos como:
+
+1. Hechos similares
+2. Recomendaciones
+3. Tipos de Soluciones
+4. Problemas similares
+5. Inferencias
+
+Antes de pensar en código, imaginate una solución paso a paso, como si fueramos a resolver un diagrama de flujo, puedes comparar diferentes soluciones, como si estuvieras solucionando un problema de paso a paso con diferentes rutas, para incluir fuentes sin pegar o copiar una solución ya existente, sino, encontrar una solución óptima para este inconveniente.
+
+*IDEA 3*: 
+
+Actúa como desarollador/ arquitecto de software / videojuego. Puedes revisar este problema de mi proyecto como si fueras un mentor o un profesor.
+
+Lo esperable : {esperable}
+Lo actual: {actual}
+Error: {errorespecifico}
+Falla que yo considero: {fallaconsiderada}
+Ptuebas que ya hice: {prueban}
+Código relacionado: {codigo}
+Solución que yo espero: {soluciónesperada}
+
+No pensemos ni actuemos con código, el punto es que identifiques cada parametro en específico para poder tener por lo menos 4 ideas o hipotesis, proponiendo pruebas rápidas para confirmar o tirar a la basura, con una explicación del por que ocurrió, correcciones y soluciones (sin código) de paso a paso, sin proponer una ya existente.
 
 # Conclusiones de uso de IA:
 
-Verdaderamente, dependiendo de tu estilo de proyecto, la I.A si puede ser una herramienta bastante decente o que aumente tu productividad o tu rango o lo que tu consideres relatviamente importante, pero, a veces si es muy probable que quedes todo hueco y menso pq nunca supiste usarla y te termino dando una estructura completa con archivos ya hechos y quedaste así (._?) pq solamente querías que te explicara un error
+Verdaderamente, dependiendo de tu estilo de proyecto, la I.A si puede ser una herramienta bastante buena o que aumente tu productividad o tu rango o lo que tu consideres relatviamente importante, pero, a veces si es muy probable que quedes todo hueco y menso pq nunca supiste usarla y te termino dando una estructura completa con archivos ya hechos y quedaste así (._?) pq solamente querías que te explicara un error. El punto es idetnficiarle un rol a cumplir y el contexto necesario, al ser una IA generativa y estar entrenada con 1029209 busquedas previas, verdaderamente no te generará un resultado único, sino es una combinación para lo que estuvo verdaderamente entrenado, así que tendrás que identificar todo de manera clara y concisa.
+
+pd: dale apoyo a este proyecto, andale ( •̀ ω •́ )✧
 
