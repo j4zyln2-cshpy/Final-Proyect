@@ -4,4 +4,6 @@
 
 1) db_manager.py: es el director de base de datos, encargado de crear el archivo database o de formato db
 2) LSD.db: archivo principal de base de datos a conectar
-3) save.json: archivo principal de guardado y muestra a utilizar durante las pruebas
+3) savegame.json: archivo principal de guardado y muestra a utilizar durante las pruebas
+
+PD: el archivo savegame.json fue creado, solamente como pruebas para conexión, posteriormente, aunque se quedará ahí, será reemplazado de sus funciones por LSD.db :3
