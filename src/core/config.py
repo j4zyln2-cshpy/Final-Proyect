@@ -3,7 +3,7 @@ import os
 screen_width = 800 #ancho de pantalla
 screen_height = 600
 fps = 60
-game_title = "Kingdom Defene 1D"
+game_title = "Kingdom Defense 1D"
 
 ground_y_position = 300
 tower_x_position = 700
