@@ -1,0 +1,14 @@
+{
+    "jugador": {
+        "gold": 100,
+        "points": 20
+    },
+    "torre_rey": {
+        "hp": 100,
+        "x_position": 600
+    },
+    "partida": {
+        "oleada_actual": 1,
+        "Nivel": 1
+    }
+}
