@@ -21,9 +21,11 @@ class GameState(BaseState):
 
     def handle_events(self, event):
         for event in event:
-            if event.type == pygame.KEYDOWN:
+            if event.type == pygame.QUIT:
+                self.game.change_state("MENU")
+            elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    self.game.change_state("MENU")
+                    self.game.change_state("PAUSE")
                 elif event.key == pygame.K_s:
                     self.save_game()
                 elif event.key == pygame.K_l:
@@ -39,8 +41,7 @@ class GameState(BaseState):
                 self.is_game_over = True
                 self.game.change_state("GAME_OVER")
 
-    def save_game(self, surface, filename="savegame.json",): #aquí guardo los datos
-        surface.fill((40, 50, 69))
+    def save_game(self, filename="savegame.json"): #aquí guardo los datos
         data = {
             "duende_x": self.duende_x,
             "duende_speed": self.duende_speed,

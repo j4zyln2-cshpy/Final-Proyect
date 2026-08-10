@@ -1,8 +1,8 @@
 import pygame
-from save_manager import SaveManager
-from base_state import BaseState
+from states.save_manager import SaveManager
+from states.base_state import BaseState
 
-class SaveState:
+class SaveState(BaseState):
     def __init__(self, game):
         super().__init__(game)
         self.font = self.font.SysFont("Arial" , 20)

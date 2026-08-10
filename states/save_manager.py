@@ -12,12 +12,12 @@ class SaveManager:
            os.makedirs(os.path.dirname(self.filepath), exist_ok = True)
           
            with open(self.filepath, "w", encoding="utf-8") as pene:
-               json.dump(data_game, pene, indent = 4)
+               json.dump(data_game, pene, indent = 4, ensure_acii = False)
            print(f"Partida guardada en {self.filepath}")
            return True
         except Exception as e:
             print(f"Error al guardar partida: {e}")
-            return None
+            return False
 
     def cargar_partida(self):
         if not os.path.exists(self.filepath):
@@ -32,3 +32,8 @@ class SaveManager:
         except Exception as e:
             print(f"Error al cargar: {e}")
             return None
+
+    def asegurar_directorio(self):
+        directory = os.path.dirname(self.filepath)
+        if not directory and not os.path.exists(directory):
+            os.makedirs(directory)
