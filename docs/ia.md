@@ -43,9 +43,23 @@ PROMPT 4: Sé que para toda importación de pygame tengo que implementar pygame.
 
 -- Función: Lógica de colisiones sencilla
 
-PROMPT 5: "Actúa como un arquitecto de videojuegos indie. Explícame de una forma un poco más conceptual, más basado en como funciona ua colisión, o en teoría, acerca de como funciona o funcionaría la detección de colisiones en un juego unidimensional entre un enemigo en movimiento y el jugador en velocidad 0, un cuerpo estático. ¿Qué variables lógicas se necesitan para que no se sobrepongan en un frame en específico del ciclo de juego y así no se vea tan sobresaturado de enemigos o entidades dentro del mapa?. Supongamos que existe Mario 1D, Goomba y Mario pueden participar en el mismo punto en el eje Y, pero, omo es el juego, al confirmarse que si hay más enemigos, ¿Cómo funcionaría para que no se vea sobresaturado un juego que tiene más de, por lo menos, 20 enemigos? Podrías incluso mostrarlo en código, pseudocódigo, o una estrategia útil que pueda entender hasta un niño"
+PROMPT 5: "Actúa como un arquitecto de videojuegos indie. Explícame de una forma un poco más conceptual, más basado en como funciona una colisión, o en teoría, acerca de como funciona o funcionaría la detección de colisiones en un juego unidimensional entre un enemigo en movimiento y el jugador en velocidad 0, un cuerpo estático. ¿Qué variables lógicas se necesitan para que no se sobrepongan en un frame en específico del ciclo de juego y así no se vea tan sobresaturado de enemigos o entidades dentro del mapa?. Supongamos que existe Mario 1D, Goomba y Mario pueden participar en el mismo punto en el eje Y, pero, omo es el juego, al confirmarse que si hay más enemigos, ¿Cómo funcionaría para que no se vea sobresaturado un juego que tiene más de, por lo menos, 20 enemigos? Podrías incluso mostrarlo en código, pseudocódigo, o una estrategia útil que pueda entender hasta un niño"
 
-Prompts desde: 01/08/2026 - 08/08/2026 
+*pd: esto me sirvió para otras pruebas, de todos modos tuve que buscar en YT como funcionaba*
+
+-- Función: Solución de error
+
+PROMPT 6: "Actúa como un arquitecto o desarrollador de software de videojuegos experimentado en Pygame, una librería de Python diseñada para videojuegos 2D. Bueno, el punto es que en Pygame tengo un error, al llamar al método save_game() dentro de GameState (en una de sus funciones de manejo de eventos), Python me devuelve un error indicando que falta un argumento que no tiene relación con la función, de tipo Surface o que esperaba una superficie. Yo tengo una carpeta de diferentes estados, cada uno tiene su función, pero normalmente solo necesita una superficie a dibujarse en un def draw, como por ejemplo, para un SaveState. En dado caso, necesito que me ayudes a revisar la lógica de estos dos métodos, y me expliques una solución factible, como si fuera a un niño, para identificar en qué parte del código el programa no se entiende con la función save_state, o incluso, en lugar de reservarla para draw(), que hace en específico*
+
+*pd: El único de los 1000 errores de pygame al cual no logré encontrarle documentación, quería subir directamente los cambios, y ni ganas tenía de seguir buscando sin encontrar nada, en dado coso, use kimi k3 para que me pudiera explicar y corregir el error, el resultado fue un cambio en la función de save_game(). El principal problema es que añadí una superficie que no era, y, al borrarla, pensaba que en lugar de guardar el estado de la superficie, la iba a borrar, cuando estaba de extra*
+
+-- Función: Preparación a cambios y mejoras futuras
+
+PROMPT 7: "Actúa como un desarrollador de videojuegos, experimentado en Pygame, pero incluso en librerías como SFML, paquetes como Allegro, y experiencia de videojuegos en C, C++, etc :3¿Que cambios o mejoras podrían ser el anillo al dedo para un juego de Tower Defense (basado en juegos Flash de defender tu torre, o incluso PvZ) de 1D, con estados de menu, game_over, pausa, juego, guardado, con director de sprites y sonidos, para poder implementar y terminar de llevar este juego desde un cambio o proyecto pequeño a un proyecto más completo (además de obviamente "indicaciones" o "movimientos" para cada sprites, nuevos dibujos, spritesheets, animaciones y mejoras en el sistema de guardado, añadiendo más archivos de guardado) y así llevar este juego a algo más desarrollado. Puedes tomar referencias y plantearme un mapa simple de desarrollo de videojuegos?"
+
+*pd: último prompt de forma definitiva, este prompt solamente fue para estructurarme un plan sencillo de cara a cambios futuros :3*
+
+Prompts desde: 01/08/2026 - 11/08/2026 
 
 # Prompts que yo recomendaría (Tomando de inspiración a D.M):
 
