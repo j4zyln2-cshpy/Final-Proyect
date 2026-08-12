@@ -1,6 +1,6 @@
 import pygame
 from states.base_state import BaseState
-import json #obvi
+import sqlite3 #obvi
 import os
 
 class GameState(BaseState):
@@ -16,7 +16,7 @@ class GameState(BaseState):
         self.torre_hp = 100.0
         self.max_torre_hp = 100.0
         self.oro = 0
-        self.puntuacion = 0
+        self.puntos = 0
         self.is_game_over = False
 
     def handle_events(self, event):
@@ -41,37 +41,54 @@ class GameState(BaseState):
                 self.is_game_over = True
                 self.game.change_state("GAME_OVER")
 
-    def save_game(self, filename="savegame.json"): #aquí guardo los datos
-        data = {
-            "duende_x": self.duende_x,
-            "duende_speed": self.duende_speed,
-            "torre_x": self.torre_x,
-            "torre_hp": self.torre_hp,
-            "oro": self.oro,
-            "puntuacion": self.puntuacion
-        }
-        with open(filename, "w") as file:
-            json.dump(data, file, indent=4)
-        print("Su partida se ha guardado correctamente") #me lo saqué de kirby dreamland
+    def save_game(self, db_filename="database/LSD.db"): #aquí guardo los datos
+        #data = {
+            #"duende_x": self.duende_x,
+            #"duende_speed": self.duende_speed,
+            #"torre_x": self.torre_x,
+            #"torre_hp": self.torre_hp,
+            #"oro": self.oro,
+            #"puntuacion": self.puntuacion }
+        try:
+            conexion = sqlite3.connect(db_filename) #primero conectamos con sqlite3
+            cursor = conexion.cursor() #creamos un cursor posterior a su conexión
 
-    def load_game(self, filename="savegame.json"):
-        if not os.path.exists(filename):
+            query = "INSERT INTO puntuaciones (jugador, oleadas, puntos) VALUES (?,?,?)" #hago una consulta e inserto los valores del jugador, oleada y puntuación actual
+            values = ("Player 1", getattr(self, "oleada", 1), self.puntos) #estos son los valores actuales, Player 1 debería de cambiarse a self.name, pero eso no lo quiero hacer ahorita JAJA
+
+            cursor.execute(query, values) #ejecutamos la query con los valores correspodneitnes
+            conexion.commit() #los "imprimimos o escribimos" en el archivo .db
+            conexion.close() #y cerramos la conexión con sqlite3
+
+            print("Puntuación guardada correctamente en la Base de Datos")
+        except Exception as e:
+            print(f"Error al guardar en la database: {e}")
+
+    def load_game(self):
+        db_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "database", "LSD.db") # se me había olvidado que tenía que pasar 2 veces el nombre de la ruta del directorio
+        if not os.path.exists(db_path): #en el caso de que no exista el archivo de guardado
             print("No existe un archivo de guardado previo")
             return False
         try:
-            with open(filename, "r") as file:
-                print("pene")
-                data = json.load(file)
-                self.duende_x = data.get("duende_x", self.duende_x) #necesito recibir al "duende" creado en el constructor
-                self.duende_speed =  data.get("duende_speed", self.duende_speed) #necesito reibir la velocidad del duente, tmb creado en el constructor
-                self.torre_x =  data.get("torre_x", self.torre_x) #necesito recibir a la torre creado en el constructor
-                self.torre_hp = data.get("torre_hp", self.torre_hp)
-                self.max_torre_hp = data.get("max_torre_hp", self.max_torre_hp)
-                self.oro = data.get("oro", self.oro)
-                self.puntuacion = data.get("puntuacion", self.puntuacion)
-            print("Partida cargada exitosamente :3")
-        except FileNotFoundError:
-            print("No encontré ningun archivo bro, sorry :/")
+            conexion = sqlite3.connect(db_path)
+            cursor = conexion.cursor()
+
+            query = "SELECT oleadas, puntos FROM puntuaciones ORDER BY id DESC LIMIT 1"
+            cursor.execute(query)
+            result = cursor.fetchone()
+
+            conexion.close()
+
+            if result:
+               self.oleada = result[0]
+               self.puntuacion = result[1]
+               print(f"Partida cargada 'exitosamente'. Puntos: {self.puntos}; Oleada: {self.oleada}")
+               return True
+            else:
+                print("No hay ningun registro previo")
+                return False
+        except Exception as e:
+            print(f"No encontré ningun archivo bro, sorry :/, tenemos un error de {e}")
 
     def draw(self, surface):
         surface.fill((40,50,60))
