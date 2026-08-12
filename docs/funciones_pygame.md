@@ -137,6 +137,43 @@ Para mostrar el dinero acumulado, puntos, vida, oleadas, o lo necesario, porfin 
 
 -- posteriormente añadiré para hacer colisiones, más funciones de añadir eventos, etc :D
 
+#pd: a partir de aquí será un contenido más corto, contaré partes de MI CÓDIGO para poder mostrar aquí
+
+10) . Gestión de Tiempo y Multiplicador Delta (pygame.time.Clock)
+Permite regular la tasa de refresco por segundo (FPS) y calcular el tiempo transcurrido entre fotogramas (`dt`). Esto garantiza que el cálculo de velocidad y movimiento en $X$ sea totalmente independiente del rendimiento de la tarjeta gráfica o procesador del usuario:
+
+reloj = pygame.time.Clock()
+
+como prueba, este código mantiene el frame loop a 60 FPS y convierte el delta time a segundos
+dt = reloj.tick(60) / 1000.0
+posicion_x += velocidad * dt
+
+11) Control de Transparencia Alpha en Superficies (pygame.SRCALPHA)
+Permite crear capas de renderizado con canales de opacidad variable mediante Surface.fill(). Se utiliza principalmente en las funciones de interfaz para dibujar oscurecimientos (overlays) durante la pausa del juego sin ocultar la escena posterior:
+
+overlay = pygame.Surface((800, 600), pygame.SRCALPHA)
+overlay.fill((0, 0, 0, 180))
+pantalla.blit(overlay, (0, 0))
+
+
+12) Posicionamiento Alineado de Texto (Font.get_rect())
+Optimiza el centrado automático de cuadros de texto o mensajes informativos en la pantalla de juego. Retorna un objeto Rect al cual se le pueden asociar anclas posicionales como center, topleft o bottomright:
+
+fuente = pygame.font.SysFont("Arial", 20)
+superficie_texto = fuente.render("MENU PAUSA", True, (255, 255, 255))
+
+
+13) Centrar el rectángulo de texto con respecto a la pantalla
+
+rect_centrado = superficie_texto.get_rect(center=(ancho_pantalla // 2, alto_pantalla // 2))
+pantalla.blit(superficie_texto, rect_centrado)
+D. Renderizado Geométrico Primario (pygame.draw)
+Utilizado para estructurar marcos de interfaz, divisiones de menú y barras de estado sin necesidad de recargar archivos de imagen adicionales para la UI:
+
+pygame.draw.rect(pantalla, (15, 20, 28), (0, 530, 800, 70))
+pygame.draw.line(pantalla, (210, 170, 50), (0, 530), (800, 530), 2)
+
+
 # ¿Cómo instalarlo?
 
 Ejecuta los siguientes comandos en orden: Ctrl + J -> Terminal -> pip install pygame 
