@@ -1,6 +1,6 @@
-*WARNING: No sabía que titulo ponerle, en este documento tendré todo lo que lleve hasta ahorita, actualizaciones por día, cambios sencillos, como hice mis pruebas, como creé mis clases, y mis decisiones actuales, está incompleto y mañana será actualizado*
+*WARNING: No sabía que titulo ponerle, así que le puse un título relacionado a mi nombre de usuario. en este documento tendré todo lo que lleve hasta ahorita, actualizaciones por día, cambios sencillos, como hice mis pruebas, como creé mis clases, y mis decisiones actuales, está incompleto y mañana será actualizado*
 
--- Fecha: 11 de agosto de 2026
+-- Fecha: 12 de agosto de 2026
 
 # Kingdom Defense / Last Standing Defense: Proyecto hecho para Coderhub Academy lol
 
@@ -16,6 +16,16 @@ Kingdom Defense es un videojuego sencillo de estrategia y defensa de torres (o T
 
 ## Justificación del Proyecto:
 
+Motivos: ninguno, simplemente lo quise crear JAJAJA, aunque obviamente estará más cutre que cagar con diarrea, simplemente tuve la necesidad de crear una arquitectura efectiva para un juego que simule la Defensa de una Torre, o hacer un videojuego interactivo en 2D/1D usando Pygame como herramienta y libería principal
+
+A través de esta propuesta, tengo 3 mini objetivos sencillos y de aplicación practica en el desarrollo:
+
+1. **State Pattern**: Gestionar la transición entre menú, juego activo, pausas y GAME OVER (PERDISTE XD)
+2. **Persistencia de Datos**: CON SQLITE debo garantizar un almacenamiento estructurado, seguro y efectivo, mi soporte fueron las 4 tablas mencionadas XD, la ruta es `database/LSD.DB`
+3. **Gestión de Recursos**: Cargar, Instanciar y Manejar Dibujos y Audios, mis mejores panas en este caso son SpriteManager (ruta: `src/core/sprite_manager`) y SoundManager (ruta: `src/core/sound_manager`)
+
+pd: usted mismo puede determinar el hecho de si fueron cumplidos o no, salvo el segundo, que fue un exito JAJAJA
+pd2: QUE NO SON SPRITES
 
 ## ¿Por qué Pygame?
 
@@ -23,7 +33,7 @@ Kingdom Defense es un videojuego sencillo de estrategia y defensa de torres (o T
 **Es perfecto para juegos uni o bidiomensionales**: Incluso ofrece soporte y documentación para manipular superficies, renderizado, reproducción de audio y dibujos, control de tiempo y loop de juego, etc
 **Control Total**: Me permite gestionar el tiempo delta, cola de eventos, estados, a pesar de que en otros motores ya venga automatizado
 **Experiencia previa (y porque era la única solución viable)**: He desarrollado algunos juegos en pygame, relativamente pequeños, como este proyecto, a pesar de las 9309309309390390390390390904940940 carpetas con 5-6 archivos como mucho JAJA (como por ejemplo: un juego RPG)
-
+**Nó me quedó de otra**: Era esto o volver a usar Flask ya teniendo como 3 proyectos con el fockin madito pero hijepta flask joe
 
 ## Requisitos e Instalación
 
@@ -116,7 +126,7 @@ python main.py
 
 - 12 de Agosto:
   
-  *a espera de resultados*
+  *Cambio de ruta para el archivo de guardado, añadidura de funciones para la clase Game en main.py, finalización de documentación*
 
 - 15 de Agosto:
 
@@ -148,6 +158,13 @@ Archivo 2: {
         "Nivel": 1 #nivel actual donde el jugador dejó la partida (único de momento)
     }
 }
+
+Archivo DB: 
+ id: N
+ jugador: Player1
+ oleada: 1
+ puntos: 0
+ datetime: KKDLKDLKDL
 
 
 # Documentación general de todo lo llevado hasta la actualidad:
@@ -183,10 +200,10 @@ En lugar de lanzar 2,000 líneas de código en un solo archivo main.py y rezarle
 
 Para no morir en el intento, aplicamos la técnica ancestral de "Divide y Vencerás". No se escribió una sola línea del juego final hasta que cada mecanismo fue probado en un laboratorio aislado (*script de test*).
 
-* **Test 1 - El Despertar de Pygame (test1.py)**:
+* **Test 1 - prueba inicial de pygame(test1.py)**:
   * *Objetivo:* Lograr que Pygame abra una ventana negra sin que la terminal mediga "Esta aplicación no responde".
   * *Resultado:* Éxito rotundo. Se validó la captura del evento QUIT (la tachita de cerrar) y la tecla ESC.
-* **Test 2 - Combate Matilde en Consola 1D (test2.py)**:
+* **Test 2 - enemigos en Consola 1D (test2.py)**:
   * *Objetivo:* Implementación rápida de enemigos
   * *Resultado:*  Valió la pena
 * **Test 3 - Carga de Texturas y Ruidos (test3.py)**:
@@ -207,7 +224,12 @@ Para no morir en el intento, aplicamos la técnica ancestral de "Divide y Vencer
 * **Test 8 - Economía, UI e Interfaz Interactiva (test8.py)**:
   * *Objetivo:* Probar las funciones de interfaz.py inyectando el diccionario del jugador, descontando oro al presionar las teclas 1, 2 o 3 y bloqueando las compras si no hay dinero suficiente.
   * *Resultado:* Sistema de tienda funcional. El menú interactivo y la barra superior respondieron de inmediato con la simulación completa de eventos.
-* **Test 9 - Test 10: Incompletos, descripciones en README.md**
+* **Test 9 -  Gestionar Oleadas y Game Over definitivo**:
+  * *Objetivo*: Probar la gestión de oleadas, implementar y llevar los avances del juego a una mini prueba, gestionar el gameoverstate y los diferentes estados
+  * *Resultado*: Problemas al principio con la gestión de oledas, resueltos debido a una estúpidez que olvidé borrar JAJAJ
+* **Test 10 -  Integración Final**:
+  * *Objetivo*; IMPLEMENTACIÓN COMPLETA, NO IMPORTA QUE HAYA O NO, COMPLETA
+  * *Resultado*: GANAMOS SSOKSPOSPSPOSPSOPSOPSOSPOSP o(≧∀≦)o
 
 
 # Arquitectura Completa del Proyecto:
@@ -222,6 +244,7 @@ Para no morir en el intento, aplicamos la técnica ancestral de "Divide y Vencer
       -- core / # *carpeta para manejar sonidos y sprites*
       -- entities/ # *carpeta de entidades*
       -- scenes/ # *escenas de juego y mapa*
+      -- ui/ *interfaz del juego*
 
 - tests /
         captures/ # *capturas de lo llevado a lo actual en el juego*
@@ -245,19 +268,51 @@ Para no morir en el intento, aplicamos la técnica ancestral de "Divide y Vencer
 
 - savegame.json *archivo principal de prueba de guardado*
 
-**SUBCARPETAS** (documentación incompleta)
+**SUBCARPETAS** 
 
-* *sounds*  
+* *sounds* 
+  - Gameover
+  - Pausa
+  - Click
+  - Confirmar Click
+  - Sonido de la transcurrencia del juego
+  - Llegada de oleada
+  - Jefe
+  - Menu
+  - Caida de Torre
 * *images*
+  - Defensores
+  - Torres
+  - Menú y Mapa
+  - Enemigos
+  - Armas
 
 * *core*
+  - Directores: SpriteManager y SoundManager
+  - Rutas: config.py
 * *entities*
+  - Enemigo
+  - Defensor
+  - Torre
+  - Proyectil
+  - Hechizo
+* *scenes*
+  - Mapa (la misma durante todo el juego)
+  - Escenas del juego (a ún futuro será mejor aprovechado)
+* *ui*
+  - Interfaz del juego
 
 * *captures*
+  capturas almacenadas durante la fase beta y las pruebas
 * *pygame*
     *captures_2*
+      capturas almacenadas del segundo juego
     *font*
+      fondo de texto xd
     *graphics*
+      sprites a usar
+    *audio*
+      musica de prueba
 
 # Archivos y carpetas principales:
 
