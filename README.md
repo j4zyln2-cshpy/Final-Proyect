@@ -162,11 +162,11 @@ nodiretitulo /
 -- Test 7: Realizado (10/08/2026)
 *Descripción:* Integración completa de Sprites , Colisiones sencilla de 1D
 
--- Test 8: Pendiente ()
+-- Test 8: Realizado (11/08/2026)
 *Descripción:* Implementación de Moneditas de Oro, Interfaz, Unidades, Colisiones de forma completa
 
 -- Test 9: Pendiente ()
-*Descripción:* Gestionar Oleadas y Game Over definnitivo (aunque en main.py ya está)
+*Descripción:* Gestionar Oleadas y Game Over definitivo (aunque en main.py ya está)
 
 -- Test 10: Pendiente ()
 *Descripción:* Integración Final, Juego Completo en versión mini
@@ -176,6 +176,7 @@ nodiretitulo /
 -- Diseñar estructura de carpeta y separar responsabilidades (Puede verse en el 1° prompt)
 -- Planificar las etapas del proyecto bajo la metodología MSCW (3° prompt)
 -- Documentación de errores y contenido necesario para poder tener estrategias claras del juego (2° prompt y 4° prompt)
+-- Guía colisional, Solución de errores y guía para mejoras futuras (5° prompt y 6° prompt)
 
 # Mejoras Futuras:
 
@@ -199,7 +200,13 @@ XDDDDDDDDDDD
 
 # Constancia de Actualizaciones:
 
--- luego de la culminación del proyecto xd, esto no es para llevar los cambios actuales, para eso tendrás subido otro archivo markdown apenas se culmine este proyecto, más bien, es para llevar constancia de actualizaciones futuras posterior a su entrega (ya que es un trabajo, no un proyecto real)
+-- luego de la culminación del proyecto xd, esto no es para llevar los cambios actuales, para eso tendrás subido otro archivo markdown apenas se culmine este proyecto, más bien, es para llevar constancia de actualizaciones futuras posterior a su entrega (ya que es un trabajo, no un proyecto real). El punto de esta constancia solo será de las actualizaciones, no los cambios diarios, ya que, al existir los más de 50 commits, no lo veo necesario
+
+V BETA 1.0.0: 
+
+-- Fecha de Lanzamiento: 12/08/2026
+
+*pd: Documentación de aquello posterior a su lanzamiento*
 
 # PD:
 
