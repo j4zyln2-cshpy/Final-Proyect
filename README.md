@@ -139,6 +139,12 @@ nodiretitulo /
 
 2) Interacción sencilla: La clase GameState procesa la colisión, al ser un eje, ejecutas una fórmula tan sencilla como si estuvieras en bachillerato viendo química orgánica: Xenemigo - Xdefensor, calculando solamente la distancia entre enemigos y las estructuras y defensores de nuestra Torre Madre o Padre (una torre tiene género?)
 
+3) Conexión de entidades:
+
+4) Guardado y Carga de Base de Datos:
+
+5) Operaciones:
+
 # Pruebas Realizadas:
 
 -- Test 1: Realizado (02/08/2026)
@@ -165,10 +171,10 @@ nodiretitulo /
 -- Test 8: Realizado (11/08/2026)
 *Descripción:* Implementación de Moneditas de Oro, Interfaz, Unidades, Colisiones de forma completa
 
--- Test 9: Pendiente ()
+-- Test 9: Realizado (12/08/2026)
 *Descripción:* Gestionar Oleadas y Game Over definitivo (aunque en main.py ya está)
 
--- Test 10: Pendiente ()
+-- Test 10: Pendiente()
 *Descripción:* Integración Final, Juego Completo en versión mini
 
 # IA y Registro de Apoyo:
@@ -177,6 +183,7 @@ nodiretitulo /
 -- Planificar las etapas del proyecto bajo la metodología MSCW (3° prompt)
 -- Documentación de errores y contenido necesario para poder tener estrategias claras del juego (2° prompt y 4° prompt)
 -- Guía colisional, Solución de errores y guía para mejoras futuras (5° prompt y 6° prompt)
+-- Mejoras y consideraciones futuras para nuevos cambios dentro del juego (7° y 8° prompt)
 
 # Mejoras Futuras:
 
@@ -197,6 +204,28 @@ git add bugs.py
 git commit -m "more bugs lol"
 
 XDDDDDDDDDDD
+
+# Persistencia y Base de Datos: 
+
+En si el juego utiliza SQLITE 3 (bueno, la herramienta es dbbrowser) para poder cargar y guardar los datos desde el punto en que el jugador haya dejadoo la partida, a trav'es de la ruta 'database/LSD.DB', ahí guardaremos los datos en una tabla llamada puntuaciones POR LOS MOMENTOS, mientras que en compras y niveles estarán de momento vacíos hasta que termine de actualizar todo
+
+*Estructura de la Tabla 'Puntuaciones'*: #pd: es la tabla principal
+   *id*: es un valor autoincremental, no importa si son los mismos datos, siempre se autoincrementerá el valor de la ID
+   *jugador*: nombre del jugador, como no he decidido que coloques nombre, de momento serás guardado como PLAYER 1
+   *oleadas*: la cantidad de oleadas de tus enemigos 
+   *puntos*: el puntaje acumulado en tu partida
+   *fecha*: hora y fecha por defecto del guardado (en un futuro a mostrar)
+
+-- Resto de Tablas:
+
+*inventario_compras*
+*configuracion_audio*
+*estado_partida*
+
+-- Principales funciones auxiliares para este apartado:
+
+* *save_game()*: Inserta dentro de la tabla los datos de partida del jugador apretando la tecla S
+* *load_game()*: Los carga siempre y cuando el usuario lo decida apretando la tecla L
 
 # Constancia de Actualizaciones:
 
