@@ -71,3 +71,29 @@ class InterfazUI:
         surface.blit(texto_oro, (20,20))
         surface.blit(texto_vida, (20,50))
         surface.blit(texto_spell, (20,80))
+
+    def drawing(self, pantalla, oro, puntos, oleada, vida_torre, max_vida = 100):
+
+        font = pygame.font.Font("font/Pixeltype.ttf")
+
+        txt_info = f"Oro: {oro}; Puntos: {puntos}; Oleada: {oleada}"
+        img_info = self.font.render(txt_info, True, (255, 255, 255))
+        pantalla.blit(img_info, (20, 20))
+
+        ancho_barra_vida = 200
+        alto_barra = 20
+        x_barra = 20
+        y_barra = 55
+
+        vida_porcentaje = max(0, vida_torre) / max_vida
+        pygame.draw.rect(pantalla, (200, 0, 0), (x_barra, y_barra, ancho_barra_vida, alto_barra))
+        pygame.draw.rect(pantalla, (0, 200, 0), (x_barra, y_barra, int(ancho_barra_vida * vida_porcentaje), alto_barra))
+        pygame.draw.rect(pantalla, (255, 255, 255), (x_barra, y_barra, ancho_barra_vida, alto_barra), 2)
+
+        txt_tienda= "[1]Espadachin (10G), [2] Cabllero (50G), [3] Hechicero (30G), [4] Soldado (20G)"
+        img_tienda= self.font.render(txt_tienda, True, (240, 200, 80))
+        pantalla.blit(img_tienda, (20, 80))
+
+
+
+       
