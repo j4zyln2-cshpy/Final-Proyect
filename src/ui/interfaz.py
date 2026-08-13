@@ -28,7 +28,7 @@ class InterfazUI:
             screen.blit(txt_pausa, rect_pausa)
 
     def menu_compra(self,  screen, font, data_player ):
-        gold = data_player.get("oro", 0)
+        gold = data_player.get("oro", 150)
         points = data_player.get("puntuación", 0)
 
         ancho, alto = screen.get_size()
@@ -74,9 +74,7 @@ class InterfazUI:
 
     def drawing(self, pantalla, oro, puntos, oleada, vida_torre, max_vida = 100):
 
-        font = pygame.font.Font("font/Pixeltype.ttf")
-
-        txt_info = f"Oro: {oro}; Puntos: {puntos}; Oleada: {oleada}"
+        txt_info = f"Oro: {oro}, Puntos: {puntos}, Oleada: {oleada}"
         img_info = self.font.render(txt_info, True, (255, 255, 255))
         pantalla.blit(img_info, (20, 20))
 
