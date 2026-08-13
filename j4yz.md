@@ -65,7 +65,7 @@ eso o descargas directo pygame
 python main.py
 
 
-## Decisiones:
+## Algunas Decisiones Tomadas:
 
 1) Patrón State: Todos heredan a través de la clave o estado base (BaseState). Por ejemplo, la clase GameState alterna un poco entre alguna que otra de las clases o estados restantes, para asi poder tener mejor en mira la lógica de interfaces, bucles, etc
 
@@ -80,6 +80,10 @@ python main.py
 3) Colisiones 1D: Como trabajé con un único eje, para evitar que sea a montones, logré descubrir que el rango de ataque omite cajas de colisión 2D que pygame tiene pero no están implementadas, al igual que motores como por ejemplo Godot, calculandose solamente la distancia entre coordenadas X. la fórmula es sencilla:
 
 | Xunidad - X objetivo | <= Rango
+
+4) "Cambio" definitivo para la Persistencia de datos: Al inicio lo más lógico sería guardar todo en un archivo savegame.json, y de hecho, esa fue mi idea de prueba. Pero, LSD.db era siempre el archivo donde se iban a sobreescribir, guardar y cargar los datos, hecha en SQLITE. Y la verdad, es muchiísimo mejor, ya que puede guardar estadísticas de diferentes usuarios, y se pueden hacer diferentes tipos de consultas para obtener datos en específico, si, debería de cambiar posteriormente a otra aplicación de database, pero al ser un proyecto relativamente de aprendizaje, usé esta (y es perfecto para esta clase de proyectos)
+
+5) Separar el Bucle Principal de la Interfaz: ¿Por qué no hice una interfaz en el main.py?. Decidí mantener las pantallas principales (como Menú, Juego, Game Over) fuera del archivo principal, la primera vez que lo intenté estructurar así con otro proyecto (que fue un Ping Pong sencillo) fue un completo fiasco, además de que se ve feo, genera código que ni Dios entiende y es más díficil de depurar en Python, si va lento, el hecho de que te tenga que cargar Interfaces, Menu, Game Over, Pausa, el juego en sí, tus funciones para animaciones principales, etc etc, es horrible, tarda un buen rato ya que Python no es precisamente un lenguaje rápido nisiquiera con archivos que tengan más de 5 lineas de código. Bueno, el punto es que los decidí separar para poder implementarlos dentro de main.py sin tener que crearlos desde el mismo archivo, sino que al ser diferentes estados/partes/animaciones/flujos les decidí dar su espacio, y así sea más fácil de manejar eso que un archivo con 5000 líneas de código para un juego que a un videogame developer le costaría 5 horas.
 
 
 ## Historial de Desarrollo y Registro
@@ -362,4 +366,3 @@ Para no morir en el intento, aplicamos la técnica ancestral de "Divide y Vencer
 
 5) Este proyecto JAJA
 
-#extra: mi primer videojuego sencillo lo hice con pygame xddddd, esta documentación sigue incompleta, continuaré mañana
