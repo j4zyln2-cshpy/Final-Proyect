@@ -26,7 +26,8 @@ class GameOverState(BaseState):
             self.game.change_state("GAME")
         elif selected == "GUARDAR PARTIDA":
             if "GAME" in self.game.states:
-                self.game.states["GAME"].save_game()
+                self.game.states["GAME"].reset()
+            self.game.change_state("GAME")
         elif selected == "mMENU PRINCIPAL":
             self.game.change_state("MENU")
 
@@ -39,12 +40,13 @@ class GameOverState(BaseState):
                surface.blit(title_surf, title_rect)
        
                for i, option in enumerate(self.options):
+            
                    if i == self.selected_index:
                        color = (255, 215, 0)
                        text_str = f"{option}"
                    else:
                        color = (180, 180, 180)
-                       option
+                       text_str = f"{option}"
                    opt_surf = self.font_options.render(text_str, True, color)
-                   opt_rect = opt_surf.get_rect(center=(surface.get_width() // 2, 330 * i * 45))
+                   opt_rect = opt_surf.get_rect(center=(surface.get_width() // 2, 300 * i * 45))
                    surface.blit(opt_surf, opt_rect)

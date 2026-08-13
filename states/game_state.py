@@ -15,7 +15,7 @@ class GameState(BaseState):
         self.torre_x = 700.0
         self.torre_hp = 100.0
         self.max_torre_hp = 100.0
-        self.oro = 0
+        self.oro = 150
         self.puntos = 0
         self.is_game_over = False
 
