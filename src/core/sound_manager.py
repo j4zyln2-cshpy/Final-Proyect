@@ -7,6 +7,7 @@ class SoundManager:
         pygame.mixer.init()
         self.ruta_base = dir_sounds
         self.sound_effects = {} #necesito identificar los efectos de clicks, como cofnrimaciones de clicks por ejemplo
+        self.music_playing = False
         #self.sound_click = pygame.mixer.Sound("assets/sounds/Confirm_Click.mp3") -- musica de clicks xd
         #self.sound_game_over = pygame.mixer.Sound("assets/sounds/Game_Over.mp3") -- musica de game over
 
@@ -16,7 +17,8 @@ class SoundManager:
         pygame.mixer.music.stop()
         pygame.mixer.music.load(file_path) #carga la musica del archivo
         pygame.mixer.music.set_volume(volumencito) #lo que sería volumen al 40%
-        pygame.mixer.music.play(loop) #la reproduce en un ciclo determinado 
+        pygame.mixer.music.play(loop) #la reproduce en un ciclo infinito hasta que se pause o se cambie la música
+        self.music_playing = True 
       except Exception as e:
          print(f"Problemita al reproducir música, {e}")
 
@@ -28,6 +30,12 @@ class SoundManager:
        
     def stop_all(self):
        pygame.mixer.music.stop()
-       pygame.mixer.stop()
+       self.music_playing = False
+
+    def pause_music():
+       pygame.mixer.music.pause()
+
+    def unpause_music():
+       pygame.mixer.music.unpause()
 
     
