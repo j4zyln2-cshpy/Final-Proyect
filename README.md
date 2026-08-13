@@ -174,7 +174,7 @@ nodiretitulo /
 -- Test 9: Realizado (12/08/2026)
 *Descripción:* Gestionar Oleadas y Game Over definitivo (aunque en main.py ya está)
 
--- Test 10: Pendiente()
+-- Test 10: Realizado (12/08/2026)
 *Descripción:* Integración Final, Juego Completo en versión mini
 
 # IA y Registro de Apoyo:
