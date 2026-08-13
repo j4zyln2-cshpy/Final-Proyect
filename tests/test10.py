@@ -34,14 +34,18 @@ def test_10():
 
     sprites_dict = {
         "mapa": "mapa_base.png",
+        "ogro": "ogro.png",
         "torre": "torre_rey.png",
         "duende": "duende.png",
         "espadachin": "espadachin.png",
         "hechicero": "hechicero.png",
         "caballero": "caballero.png",
+        "soldado": "soldado.png",
     }
     for key, val in sprites_dict.items():
         sprite_mgr.load_sprite(key, val)
+
+    sound_mgr.play_music("Game_Transcurrency.mp3")
 
     partida = {
         "jugador": "Jugador1",
@@ -53,6 +57,7 @@ def test_10():
         "espadachines": 0,
         "hechiceros": 0,
         "caballeros": 0,
+        "soldados": 0
     }
 
     enemigos = []
@@ -78,11 +83,12 @@ def test_10():
                 (partida["oro"], int(partida["torre_hp"]), partida["oleada"]),
             )
             cursor.execute(
-                "INSERT INTO inventario_compras (espadachines, hechiceros, caballeros) VALUES (?, ?, ?)",
+                "INSERT INTO inventario_compras (cant_espadachines, cant_hechiceros, cant_caballeros, cant_soldados) VALUES (?, ?, ?)",
                 (
                     partida["espadachines"],
                     partida["hechiceros"],
                     partida["caballeros"],
+                    partida["soldados"]
                 ),
             )
             conn.commit()
@@ -103,7 +109,7 @@ def test_10():
             )
             res_estado = cursor.fetchone()
             cursor.execute(
-                "SELECT espadachines, hechiceros, caballeros FROM inventario_compras ORDER BY id DESC LIMIT 1"
+                "SELECT cant_espadachines, cant_hechiceros, cant_caballeros, cant_soldados FROM inventario_compras ORDER BY id DESC LIMIT 1"
             )
             res_inv = cursor.fetchone()
             conn.close()
@@ -116,6 +122,7 @@ def test_10():
                 partida["espadachines"] = res_inv[0]
                 partida["hechiceros"] = res_inv[1]
                 partida["caballeros"] = res_inv[2]
+                partida["soldados"] = res_inv[3]
 
             mensaje_db = "¡PARTIDA CARGADA DESDE LSD.DB!"
             timer_mensaje = 2.0
@@ -130,13 +137,17 @@ def test_10():
         if timer_mensaje > 0:
             timer_mensaje -= dt
 
-        # EVENTOS
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 ejecutando = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     pausado = not pausado
+
+                    if pausado:
+                        sound_mgr.play_music("Pause.mp3")
+                    else:
+                        sound_mgr.play_music("Game_Transcurrency.mp3")
 
                 if not game_over and not pausado:
                     if event.key == pygame.K_1 and partida["oro"] >= 50:
@@ -154,6 +165,11 @@ def test_10():
                         partida["caballeros"] += 1
                         partida["puntos"] += 120
                         aliados.append(Tropas("caballero", 150, 60.0))
+                    elif event.key == pygame.K_4 and partida["oro"] >= 80:
+                        partida["oro"] -= 80
+                        partida["soldados"] += 1
+                        partida["puntos"] += 100
+                        aliados.append(Tropas("soldado", 150, 60.0))
 
                     elif event.key == pygame.K_s:
                         guardar_sqlite()
@@ -167,6 +183,7 @@ def test_10():
                 enemigos.append(
                     Tropas("duende", 0, 70.0 + (partida["oleada"] * 10))
                 )
+                sound_mgr.play_music("Oleada.mp3")
 
             for ene in enemigos:
                 if ene.activo:
@@ -176,6 +193,7 @@ def test_10():
                         if partida["torre_hp"] <= 0:
                             partida["torre_hp"] = 0
                             game_over = True
+                            sound_mgr.play_music("Game_Over.mp3")
 
             for ali in aliados:
              img = sprite_mgr.get_sprite(ali.tipo)
@@ -217,14 +235,15 @@ def test_10():
 
         for ene in enemigos:
             img = sprite_mgr.get_sprite("duende")
+            img2 = sprite_mgr.get_sprite("ogro")
             if img:
                 pantalla.blit(img, (int(ene.x), screen_height - 150))
             else:
-                pygame.draw.rect(
-                    pantalla,
-                    (200, 50, 50),
-                    (int(ene.x), screen_height - 150, 30, 30),
-                )
+                 pygame.draw.rect(
+                 pantalla,
+                 (200, 50, 50),
+                 (int(ene.x), screen_height - 150, 30, 30),
+                 )
 
         for ali in aliados:
             img = sprite_mgr.get_sprite(ali.tipo)
@@ -259,9 +278,10 @@ def test_10():
             pantalla.blit(overlay, (0, 0))
             fuente_p = pygame.font.SysFont("Arial", 36, bold=True)
             pantalla.blit(
-                fuente_p.render("JUEGO EN PAUSA", True, (255, 255, 255)),
+                fuente_p.render("PAUSA", True, (255, 255, 255)),
                 (screen_width // 2 - 120, screen_height // 2),
             )
+            sound_mgr.play_music("Pause.mp3")
 
         if game_over:
             overlay = pygame.Surface(
