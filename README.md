@@ -45,7 +45,7 @@ Recomendación personal: busca documentación de pygame lol xdddddd
 
 python -m venv insertnombredenetornovirtual.mp4
 
--- en windows: name\Scripts\activate (pd: yo no tengo, está de extra, lo activé pensando que lo iba a usar XD)
+-- en windows: name\Scripts\activate (pd: yo tengo, pero está de extra, lo activé pensando que lo iba a usar XD)
 
 # Instalar las depedencias que necesitas o la librería:
 
@@ -233,9 +233,9 @@ En si el juego utiliza SQLITE 3 (bueno, la herramienta es dbbrowser) para poder 
 
 V BETA 1.0.0: 
 
--- Fecha de Lanzamiento: 12/08/2026
+-- Fecha de Lanzamiento: 13/08/2026
 
-*pd: Documentación de aquello posterior a su lanzamiento*
+
 
 # PD:
 
