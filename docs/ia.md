@@ -59,7 +59,14 @@ PROMPT 7: "Actúa como un desarrollador de videojuegos, experimentado en Pygame,
 
 *pd: último prompt de forma definitiva, este prompt solamente fue para estructurarme un plan sencillo de cara a cambios futuros :3*
 
-Prompts desde: 01/08/2026 - 11/08/2026 
+
+-- Función: Resolver fallos criticos de guardado en la base de datos SQlite por enviar estructuras SIN SOPORTE (dbbrowser, tu eres gei?)
+
+PROMPT 8: "Durante la integración para guardar daos en main.py la consola arrojó un error de Error binding parameter: type 'dict' is not supported. Si, tengo entendido que esta función nes para cuando arrastro (entre 8003 comillas) un objeto en Python a SQLITE3, Pero ¿Cual es la causa raíz en el flujo de un juego como Pygame al guardar los datos, ya que yo tengo una tabla de estado_partida que recibe un inventario donde tengo 4 entidades (caballero, defensor, espadachin, soldado), cómo debo ajustarlo para que en la tabla pueda guardarlo? Es por el tipo de dato colocado, y si es ¿Que solución sería la más ideal para corregirlo?, porque en esa tabla guardaré lo que esté en el inventario"
+
+*pd: Opté por remover la columa inventario de la tabla estado_partida, solamente delegué el almacenamiento de tropas compradas a la tabla de inventario_compras*
+
+Prompts desde: 01/08/2026 - 13/08/2026 
 
 # Prompts que yo recomendaría (Tomando de inspiración a D.M):
 
