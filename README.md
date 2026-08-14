@@ -235,7 +235,39 @@ V BETA 1.0.0:
 
 -- Fecha de Lanzamiento: 13/08/2026
 
+Esta es una versión realmente muy beta, por lo tanto, la mayoría de contenido, como los dibujos, escenario, menu, música, colisiones, ataques, colisiones serán replanificados con el paso del tiempo
 
+*Trae Pantalla Completa Adaptativa*: con pygame.RESIZABLE la ventana es "adaptativa" o "elástica" (o como tu lo quieras decir a mi no me importa mucho xd) para poder jugar en pantalla completa
+*Interfaz Visual*: Un menú con las indicaciones/controles necesarios para que hasta un niño pueda jugar
+*Gestión de Estados*: Transición entre Menu, Juego, Pausa y Game_Over, e incluso el estado de guardado el cual se conecta al archivo .db
+*Música y Sprites*: Esto ni se pq lo menciono si van a ser cambiados, esos son diujos hechos en paint con captura y fondo removido, la música ni es mía XD
+*Persistencia / Guardado / Conexión con SQLITE*: Guardado `S` y Carga `L` seguros y bien "gestionados" en LSD.db
+
+# NUEVOS REQUISITOS E INSTALACIÓN:
+
+* *Python Interpreter*: +=3.10 (recomendado 3.13)
+* *Pygame*: 2.5.0, superior, con soporte para este juego xd
+
+<NOTA IMPORTANTE: Si experimentas problemas al installar Pygame o ejecutar ´pip install -r requirements.txt´, como conflictos de versiones de Python o formato - versión sin soporte>
+
+1. Asegurate de estar utilizando un venv:
+
+python -m venv venv
+
+Windows: .\venv\Scripts\ activate
+
+MacOs / Linux: source venv/bin/activate
+
+--pd: con esto activas el entorno virtual
+
+2. Si pip presenta fallos en la terminal de VS Code, actualiza la herramienta:
+
+python -m pip install --upgrade
+pip install pygame
+
+# REVISIONES DE PARTE DE COMPAÑEROS:
+
+En issues tenemos revisión por parte de un compañero, Andrés, que aunque reviso una parte previa debido a la falta de contenido, por lo menos dió su opinión y probó el juego, falta que lo ejecute como formato aplicación
 
 # PD:
 
