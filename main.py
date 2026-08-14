@@ -1,11 +1,6 @@
 import sys
 import pygame
-from database.db_manager import (
-    get_connection,
-    guardar_partida,
-    init_db,
-    obtener_mejores_puntajes,
-)
+from database.db_manager import ( get_connection,guardar_partida,init_db, obtener_mejores_puntajes, cargar_partida)
 from src.core.config import fps, game_title, screen_height, screen_width
 from src.core.sound_manager import SoundManager
 from src.core.sprite_manager import SpriteManager
@@ -16,14 +11,14 @@ from states.menu_state import MenuState
 from states.pause_state import PauseState
 
 
-class GameMacro:
+class Game:
 
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode(
             (screen_width, screen_height), pygame.RESIZABLE
         )
-        pygame.display.set_caption(f"{game_title} - Macro Version")
+        pygame.display.set_caption(f"{game_title}")
         self.clock = pygame.time.Clock()
 
         self.sprite_manager = SpriteManager()
@@ -33,6 +28,8 @@ class GameMacro:
         self.cargar_assets()
         init_db()
 
+        self.font_titulo = pygame.font.Font("font/Pixeltype.ttf", 64)
+        self.font_sub = pygame.font.Font("font/Pixeltype.ttf", 36)
         self.reset_jugador()
 
         self.enemigos = []
@@ -49,12 +46,13 @@ class GameMacro:
             "puntuacion": 300,
             "oleada": 1,
             "vida_torre_rey": 100,
+            "posicion_duende": 0.0,
             "inventario": {
                 "espadachin": 0,
                 "hechicero": 0,
                 "caballero": 0,
                 "soldado": 0,
-            },
+            }, 
         }
 
     def cargar_assets(self):
@@ -79,7 +77,6 @@ class GameMacro:
 
     def cambiar_estado(self, nuevo_estado):
         self.estado_actual = nuevo_estado
-        # Adaptación dinámica de la música
         if nuevo_estado == "MENU":
             self.sound_manager.play_music("Menu_Principal.mp3")
         elif nuevo_estado == "GAME":
@@ -87,7 +84,6 @@ class GameMacro:
         elif nuevo_estado == "PAUSE":
             self.sound_manager.play_music("Pause.mp3")
         elif nuevo_estado == "GAME_OVER":
-            self.sound_manager.stop_music()
             self.sound_manager.play_music("Game_Over.mp3")
 
     def desplegar_defensa(self, tipo):
@@ -138,6 +134,10 @@ class GameMacro:
                     "activo": True,
                 }
             )
+            try:
+                self.sound_manager.play_music("Oleada.mp3")
+            except Exception as e:
+                print(f"Problemas con el audio por: {e}")
 
     def actualizar_combate_y_movimiento(self, dt):
         for dfc in self.defensores:
@@ -169,7 +169,6 @@ class GameMacro:
                 continue
 
             bloqueado = False
-            # Choque Enemigo - Defensor
             for dfc in self.defensores:
                 if dfc["activo"] and abs(ene["x"] - dfc["x"]) < 30:
                     bloqueado = True
@@ -209,6 +208,7 @@ class GameMacro:
                         self.datos_jugador["oro"],
                         self.datos_jugador["vida_torre_rey"],
                         self.datos_jugador["inventario"],
+                        self.datos_jugador["posicion_duende"]
                     )
                     self.cambiar_estado("GAME_OVER")
 
@@ -219,9 +219,15 @@ class GameMacro:
     def renderizar_juego(self):
         screen = self.screen
 
+        info_pantalla = pygame.display.Info()
+        self.screen_width = info_pantalla.current_w
+        self.screen_height = info_pantalla.current_h
+
         mapa = self.sprite_manager.get_sprite("mapa")
         if mapa:
-            screen.blit(mapa, (0, 0))
+            mapota = pygame.transform.scale(mapa, (self.screen_width, self.screen_height))
+            screen.blit(mapota, (0,0))
+
 
         if self.estado_actual == "GAME":
             t_magica = self.sprite_manager.get_sprite("torre_magica")
@@ -258,17 +264,133 @@ class GameMacro:
                 self.datos_jugador["vida_torre_rey"],
             )
 
+
+        elif self.estado_actual == "PAUSE":
+            overlay = pygame.Surface(screen.get_size(), pygame.SRCALPHA)
+            overlay.fill((0, 0, 0, 180))
+            screen.blit(overlay, (0, 0))
+
+            cx = screen.get_width() // 2
+            cy = screen.get_height() // 2
+
+            try:
+                font_p = pygame.font.Font("font/Pixeltype.ttf", 64)
+                font_sub = pygame.font.Font("font/Pixeltype.ttf", 36)
+            except Exception:
+                font_p = pygame.font.SysFont("Arial", 50, bold=True)
+                font_sub = pygame.font.SysFont("Arial", 28)
+
+            txt_p = font_p.render("JUEGO EN PAUSA", True, (255, 215, 0))
+            txt_sub = font_sub.render(
+                "Presiona [ P ] para Continuar", True, (255, 255, 255)
+            )
+
+            screen.blit(txt_p, (cx - txt_p.get_width() // 2, cy - 60))
+            screen.blit(txt_sub, (cx - txt_sub.get_width() // 2, cy + 20))
+
+        elif self.estado_actual == "GAME_OVER":
+   
+            screen.fill((25, 5, 5))
+
+            cx = screen.get_width() // 2
+            cy = screen.get_height() // 2
+
+            try:
+                font_go = pygame.font.Font("font/Pixeltype.ttf", 72)
+                font_sub = pygame.font.Font("font/Pixeltype.ttf", 36)
+            except Exception:
+                font_go = pygame.font.SysFont("Arial", 60, bold=True)
+                font_sub = pygame.font.SysFont("Arial", 28)
+
+            txt_go = font_go.render("PERDISTE XD", True, (255, 50, 50))
+            txt_puntos = font_sub.render(
+                f"Puntuacion Final: {self.datos_jugador['puntuacion']}",
+                True,
+                (255, 215, 0),
+            )
+            txt_inst = font_sub.render(
+                "Presiona ESC para volver al Menu", True, (200, 200, 200)
+            )
+
+            screen.blit(txt_go, (cx - txt_go.get_width() // 2, cy - 80))
+            screen.blit(
+                txt_puntos, (cx - txt_puntos.get_width() // 2, cy - 10)
+            )
+            screen.blit(txt_inst, (cx - txt_inst.get_width() // 2, cy + 50))
+
         elif self.estado_actual == "MENU":
+            screen.fill((15, 15, 25))
             fondo = self.sprite_manager.get_sprite("fondo_menu")
             if fondo:
-                screen.blit(fondo, (0, 0))
+                fondox = pygame.transform.scale(fondo, (screen.get_width(), screen.get_height()))
+                screen.blit(fondox, (0, 0))
+
+            try:
+                font_titulo = pygame.font.Font("font/Pixeltype.ttf", 60)
+                font_sub = pygame.font.Font("font/Pixeltype.ttf", 32)
+            except Exception:
+                font_titulo = pygame.font.SysFont("Arial", 50, bold=True)
+                font_sub = pygame.font.SysFont("Arial", 28)
+
+            cx = screen.get_width() // 2
+
+            txt_m = font_titulo.render("Kingdom Defense 1D / Last Standing Defense", True, (255, 215, 0))
+            txt_inst = font_sub.render("Presiona [ G ] para Jugar", True, (255, 255, 255))
+
+            screen.blit(txt_m, (cx - txt_m.get_width() // 2, 80))
+            screen.blit(txt_inst, (cx - txt_inst.get_width() // 2, 150))
+
+            controles = [
+                "[1] Poner al Espadachin ($50)",
+                "[2] Poner al Hechicero ($30)",
+                "[3] Poner al Caballero ($70)",
+                "[4] Poner al Soldado ($40)",
+                "[P] Pausa / Reanudar",
+                "[S] Guardar Partida"
+                "[L] Cargar Partida"
+            ]
+
+
+
+            y_offset = 220
+            for linea in controles:
+                color = (255, 215, 0) if "---" in linea else (220, 220, 220)
+                txt_c = font_sub.render(linea, True, color)
+                screen.blit(txt_c, (cx - txt_c.get_width() // 2, y_offset))
+                y_offset += 35
+
 
         pygame.display.flip()
 
-    def run(self):
-        self.cambiar_estado("GAME")  
+    def guardar_progreso(self):
+        pos_duende = self.enemigos[0]["x"] if len(self.enemigos) > 0 else 0.0
 
-        #estados: GAME, MENU, GAME_OVER, PAUSE
+        data = guardar_partida(
+             self.datos_jugador["nombre"],
+             self.datos_jugador["oleada"],
+             self.datos_jugador["puntuacion"],
+             self.datos_jugador["oro"],
+             self.datos_jugador["vida_torre_rey"],
+             self.datos_jugador["inventario"],
+              pos_duende,
+        )
+        if data:
+            print("Datos guardados con éxito")
+
+    def cargar_partida_lol(self):
+        data = cargar_partida()
+        if data:
+            self.datos_jugador["oro"] = data["oro"]
+            self.datos_jugador["vida_torre"] = data["vida_torre"]
+            self.datos_jugador["oleada"] = data["oleada_actual"]
+            self.datos_jugador["inventario"] = data["inventario"]
+            print("Partida cargada EXITOSAMENTE COÑO")
+        else:
+            print("No se encontró ninguna partida guardada previa.")
+
+    def run(self):
+        self.cambiar_estado("MENU")
+
 
         while True:
             dt = self.clock.tick(fps) / 1000.0
@@ -279,8 +401,16 @@ class GameMacro:
                     sys.exit()
 
                 if event.type == pygame.KEYDOWN:
-                    if self.estado_actual == "GAME":
-                        if event.key == pygame.K_1:
+                    if self.estado_actual == "MENU":
+                        if event.key == pygame.K_g:
+                            self.reset_jugador()
+                            self.cambiar_estado("GAME")
+
+
+                    elif self.estado_actual == "GAME":
+                        if event.key == pygame.K_p:
+                            self.cambiar_estado("PAUSE")
+                        elif event.key == pygame.K_1:
                             self.desplegar_defensa("espadachin")
                         elif event.key == pygame.K_2:
                             self.desplegar_defensa("hechicero")
@@ -289,6 +419,7 @@ class GameMacro:
                         elif event.key == pygame.K_4:
                             self.desplegar_defensa("soldado")
                         elif event.key == pygame.K_s:
+                            pos_duende = self.enemigos[0]["x"] if len(self.enemigos) > 0 and "x" in self.enemigos[0] else 0.0
                             guardar_partida(
                                 self.datos_jugador["nombre"],
                                 self.datos_jugador["oleada"],
@@ -296,7 +427,18 @@ class GameMacro:
                                 self.datos_jugador["oro"],
                                 self.datos_jugador["vida_torre_rey"],
                                 self.datos_jugador["inventario"],
+                                pos_duende
                             )
+                        elif event.key == pygame.K_l:
+                            self.cargar_partida_lol()
+
+                    elif self.estado_actual == "PAUSE":
+                        if event.key == pygame.K_p:
+                            self.cambiar_estado("GAME")
+
+                    elif self.estado_actual == "GAME_OVER":
+                        if event.key == pygame.K_ESCAPE:
+                            self.cambiar_estado("MENU")
 
             if self.estado_actual == "GAME":
                 self.spawn_enemigos(dt)
@@ -304,9 +446,8 @@ class GameMacro:
 
             self.renderizar_juego()
 
-
 if __name__ == "__main__":
-    game = GameMacro()
+    game = Game()
     game.run()
 
 #Python -m PyInstaller --noconsole --onefile main.py
